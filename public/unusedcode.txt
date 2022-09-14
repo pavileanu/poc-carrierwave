@@ -1,0 +1,24 @@
+    #url = User.first.file.file.url
+    #filename = User.first.file.file.filename
+    #File.open(filename, 'w') do |f| 
+    #  response = HTTParty.get(url,
+    #    stream_body: true,  
+    #  ).parsed_response         
+    #  
+    #  f.write(response)
+    #  f.close
+    #end  
+    
+    url1 = 'http://qa22.contentsexpress.lan/claimsws/api/Claim/Attachments/V1/8da35c33-e3c1-44f7-ac8c-a4e75ca8b987?Description=LOGIN.png (From Guidewire)&RefType=Claim&AttachmentName=LOGIN.png&HasPII=true&AttachmentTypeId=9'
+    
+    headers1 = {:EnservioAuthorizationToken=>"YOY/1MZcIUREETxo8cY0K3mClPNWbUyxK1AjQFrmTjO1VVbzShTySDoXQt7P2ZZwsx/MNMfmtfoDWfjavxJpC+Q5k9+b28qPow0kCWrRKcxFHcspPbz+YtzMT5JG4InEfh3oxSRHXSZw/ig25QLcyfNFLsEj+QJYWdb+w8yGO+RAQAfv0B1MApIUXpiizsf/+3RnKmtjQOCggTk+W52XbHgGy+9bg0fDcS3EOdK4bwWkgVAsKuqVwOk+4/ugCdaUDzZmCZ5JDzIZIYYNN7Ju/9jM0ERtqvxbGk8GXHwE2CoCdd9LBtAc4aRNJ0nFcPmHkxb2H3CRXTa31WEcgohQyA==", :"Content-Length"=>"124069"}
+    url = 'https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start_remove-79a4598a05a77ca999df1dcb434160994b6fde2c3e9101984fb1be0f16d0a74e.png'
+
+    uploader = User.first.file
+    uploader.cache_stored_file!
+
+    file_location = Rails.root.join('public', uploader.cache_path).to_s
+
+    response1 = HTTParty.post(url1, body_stream: File.open(file_location), headers: headers1)
+    byebug
+    render json: response1
