@@ -26,10 +26,12 @@ class UsersController < ApplicationController
     user.file = file
     user.name = 'my name'
     begin 
-      user.save!
-    rescue
+      User.transaction do
+        user.save!
+      end
+    rescue => e
       @users = User.all
-      @notice = 'ERROR SAVING INTO S3'
+      @notice = "ERROR SAVING INTO S3, #{e}"
       render action: 'index'
       return
     end  
