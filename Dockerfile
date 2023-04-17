@@ -17,6 +17,6 @@ RUN /bin/bash -l -c "rvm use 2.7.0 && ruby -v"
 RUN /bin/bash -l -c "cd /var/myapp && bundle install && rake db:migrate"
 EXPOSE 3000
 
-#CMD ["rails", "server", "-b", "0.0.0.0"]s
+CMD ["/bin/bash", "-l", "-c", "cd /var/myapp && rails server -b 0.0.0.0"]
 
 
