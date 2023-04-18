@@ -1,4 +1,4 @@
-<p id="error"><%= @notice %></p>
+<p id="error"><%= flash[:alert] %></p>
 
 <h1>Users</h1>
 
@@ -26,6 +26,7 @@
 <form action="/users" method="POST">
   <p>
     Request would fail on purpose when saving a file to carrierwave storage (local).
+    FIXED
   </p>
   <input type="submit" value="Add image with carrierwave"/>
 </form>

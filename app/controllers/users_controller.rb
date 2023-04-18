@@ -30,13 +30,12 @@ class UsersController < ApplicationController
         user.save!
       end
     rescue => e
-      @users = User.all
-      @notice = "ERROR SAVING INTO S3, #{e}"
-      render action: 'index'
+      flash[:alert] = "ERROR SAVING INTO S3, #{e}"
+      User.delete(user)
+      redirect_to action: 'index'
       return
-    end  
-    @users = User.all
-    render action: 'index'
+    end 
+    redirect_to action: 'index'
   end
 
   # PATCH/PUT /users/1 or /users/1.json
